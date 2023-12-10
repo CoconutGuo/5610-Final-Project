@@ -30,7 +30,7 @@ axios.interceptors.response.use(
     }
 
     notification.error({
-      message: `请求错误 ${response.statusText}: ${response}`,
+      message: `Wrong Request ${response.statusText}: ${response}`,
       description: data || response.statusText || 'Error',
     })
 
@@ -41,13 +41,13 @@ axios.interceptors.response.use(
   },
   (error) => {
     console.log('err:', error) // for debug
-    let msg = error.message || '请求错误'
+    let msg = error.message || 'Wrong Request'
 
     if (error.response && error.response.status) {
       switch (error.response.status) {
-        // 401: 未登录
-        // 未登录则跳转登录页面，并携带当前页面的路径
-        // 在登录成功后返回当前页面，这一步需要在登录页操作。
+        // 401: non-signin
+        // If you are not logged in, you will be redirected to the login page and carry the path to the current page.
+        // To return to the current page after a successful login, this step needs to be done on the login page
         case 401:
         case 403:
           // window.location.href = '/'
@@ -57,28 +57,28 @@ axios.interceptors.response.use(
             description: error.response.data?.msg || 'Error',
           })
           break
-        // 404请求不存在
+        // 404
         case 404:
           notification.error({
-            message: `请求不存在`,
+            message: `404 Non-exist`,
             description: error.response.data?.msg || 'Error',
           })
           break
         case 406:
           notification.error({
-            message: `请求参数有误`,
+            message: `406 Error parameters`,
             description: error.response.data?.msg || 'Error',
           })
           break
         default:
           notification.error({
-            message: `请求错误`,
+            message: `Error request`,
             description: error.response.data?.msg || 'Error',
           })
       }
     } else {
       notification.error({
-        message: '网络错误',
+        message: 'Error Network',
         description: msg,
       })
     }

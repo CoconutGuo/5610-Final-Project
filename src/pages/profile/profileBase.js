@@ -14,7 +14,7 @@ import { useUserContext } from '@/store/useUser'
 
 const cardBodyStyle = { paddingTop: 0, paddingBottom: 0 }
 
-function Profile() {
+function ProfileBase() {
   const { userInfo } = useUserContext()
 
   const [baseInfo, setBaseInfo] = useState({})
@@ -159,4 +159,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default ProfileBase
