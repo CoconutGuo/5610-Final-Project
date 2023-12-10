@@ -1,0 +1,18 @@
+.ipc-title__text {
+  display: flex;
+  max-height: 2.4em;
+  overflow: hidden;
+  border: none;
+  padding-left: 0.75rem;
+  position: relative;
+}
+
+.ipc-title__text:before {
+  background: #f5c518;
+  content: '';
+  margin-left: -0.75rem;
+  align-self: flex-start;
+  position: absolute;
+  height: 100%;
+  width: 4px;
+}
