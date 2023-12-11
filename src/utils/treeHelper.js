@@ -1,11 +1,11 @@
 import { cloneDeep } from 'lodash-es'
 
 /**
- * 遍历 tree
+ * Traverse tree
  * @param {object[]} tree
- * @param {function} cb - 回调函数
- * @param {string} children - 子节点 字段名
- * @param {string} mode - 遍历模式，DFS：深度优先遍历 BFS：广度优先遍历
+ * @param {function} cb - call back
+ * @param {string} children 
+ * @param {string} mode - traverse mode，DFS & BFS
  * @return {void} Do not return anything
  */
 export function treeForEach(tree, cb, children = 'children', mode = 'DFS') {
@@ -19,7 +19,7 @@ export function treeForEach(tree, cb, children = 'children', mode = 'DFS') {
     throw new Error('children is not a valid string')
   }
 
-  // 深度优先遍历 depth first search
+  // depth first search
   function DFS(treeData) {
     // eslint-disable-next-line
     for (const item of treeData) {
@@ -31,7 +31,7 @@ export function treeForEach(tree, cb, children = 'children', mode = 'DFS') {
     }
   }
 
-  // 广度优先遍历 breadth first search
+  // breadth first search
   function BFS(treeData) {
     const queen = treeData
 
@@ -53,10 +53,10 @@ export function treeForEach(tree, cb, children = 'children', mode = 'DFS') {
 }
 
 /**
- * tree 转 数组
+ * tree to arrays
  * @param {object[]} tree
- * @param {string} children - 子节点 字段名
- * @param {string} mode - 遍历模式，DFS：深度优先遍历 BFS：广度优先遍历
+ * @param {string} children
+ * @param {string} mode
  * @return {array}
  */
 export function treeToList(tree, children = 'children', mode = 'DFS') {
@@ -79,20 +79,20 @@ export function treeToList(tree, children = 'children', mode = 'DFS') {
   }, children, mode)
 
   list.forEach((item) => {
-    delete item[children] // 会改变 原数据
+    delete item[children] // change the original data
   })
 
   return list
 }
 
 /**
- * 数组 转 tree
+ * arrays to tree
  * @param {object[]} list
  * @param {object} options
- * @param {string|number|null|undefined} options.rootID - 根节点ID
- * @param {string|number} options.id - 唯一标识 字段名
- * @param {string|number} options.pid - 父节点ID 字段名
- * @param {string} options.children - 子节点 字段名
+ * @param {string|number|null|undefined} options.rootID - root ID
+ * @param {string|number} options.id - ID
+ * @param {string|number} options.pid - parent ID
+ * @param {string} options.children
  * @return {array}
  */
 
@@ -107,10 +107,10 @@ interface Options {
 
 export function listToTree(list, options) {
   const {
-    rootID = null, // 根节点ID，pid === rootID 即为 一级节点
-    id = 'id', // 唯一标识
-    pid = 'pid', // 父节点ID 字段
-    children = 'children' // 子节点 字段
+    rootID = null, // root ID，pid === rootID
+    id = 'id', // ID
+    pid = 'pid', // parent ID
+    children = 'children'
   } = options || {}
 
   if (!Array.isArray(list)) {
@@ -135,9 +135,9 @@ export function listToTree(list, options) {
   Array.from(map.keys()).forEach(key => {
     const node = map.get(key)
 
-    if (node[pid] === rootID) { // 一级节点，直接添加到 tree
+    if (node[pid] === rootID) { // root - add to tree
       tree.push(node)
-    } else { // 非一级节点，查找父级，并添加到父级 children 中
+    } else { // non-root - find parent and add to parent's children
       const pNode = map.get(node[pid])
 
       if (Array.isArray(pNode[children])) {

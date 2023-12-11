@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { findPendingReviews, changeReviewStatus } from '@/api/review'
 
-const Admin = () => {
+const Review = () => {
   const columns = [
     { title: 'ID', dataIndex: '_id', key: '_id' },
     {
@@ -69,4 +69,4 @@ const Admin = () => {
 
   return <Table columns={columns} dataSource={reviews} />
 }
-export default Admin
+export default Review
