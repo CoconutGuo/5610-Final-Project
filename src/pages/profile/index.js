@@ -27,7 +27,7 @@ function Profile() {
     try {
       const values = await form.validateFields()
       delete values.confirm
-      //   todo 修改
+      //   todo modify
       const res = await updateUser(userInfo._id, values)
       setUserInfo({ ...userInfo, ...values })
       message.success('update success!')
@@ -156,9 +156,9 @@ function Profile() {
 
             <Form.Item name="gender" label="Gender">
               <Select placeholder="select your gender">
-                <Option value="male">Male</Option>
-                <Option value="female">Female</Option>
-                <Option value="other">Other</Option>
+                <Option value="Male">Male</Option>
+                <Option value="Female">Female</Option>
+                <Option value="Other">Other</Option>
               </Select>
             </Form.Item>
 
