@@ -146,9 +146,9 @@ const Admin = () => {
 
           <Form.Item name="gender" label="Gender">
             <Select placeholder="select gender">
-              <Option value="male">Male</Option>
-              <Option value="female">Female</Option>
-              <Option value="other">Other</Option>
+              <Option value="Male">Male</Option>
+              <Option value="Female">Female</Option>
+              <Option value="Other">Other</Option>
             </Select>
           </Form.Item>
 
