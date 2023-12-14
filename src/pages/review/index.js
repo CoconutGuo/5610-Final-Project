@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Popconfirm, message, Space, Table } from 'antd'
 import { Link } from 'react-router-dom'
 
-import { findPendingReviews, changeReviewStatus } from '@/api/review'
+import { findPendingReviews, changeReviewStatus, deleteReview } from '@/api/review'
 
 const Review = () => {
   const columns = [
@@ -28,7 +28,7 @@ const Review = () => {
           <Button danger onClick={() => handelReviewStatus(record)}>
             Accept
           </Button>
-          <Popconfirm title="Reject the review?" description="Are you sure to reject this task?" onConfirm={confirm}>
+          <Popconfirm title="Reject the review?" description="Are you sure to reject this task?" onConfirm={() => confirmDelete(record)}>
             <Button danger>Reject</Button>
           </Popconfirm>
         </Space>
@@ -57,9 +57,17 @@ const Review = () => {
     }
   }
 
-  const confirm = async (review) => {
+  // const confirmDelete = async (review) => {
+  //   try {
+  //     await handelReviewStatus(review, 'Conform')
+  //   } catch (error) {}
+  // }
+
+  const confirmDelete = async (review) => {
     try {
-      await handelReviewStatus(review, 'Conform')
+      await deleteReview(review)
+      message.success(`Delete ${review._id} success!`)
+      fetchAllPendingReviews()
     } catch (error) {}
   }
 
