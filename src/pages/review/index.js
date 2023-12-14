@@ -28,9 +28,12 @@ const Review = () => {
           <Button danger onClick={() => handelReviewStatus(record)}>
             Accept
           </Button>
-          <Popconfirm title="Reject the review?" description="Are you sure to reject this task?" onConfirm={() => confirmDelete(record)}>
+          {/* <Popconfirm title="Reject the review?" description="Are you sure to reject this task?" onConfirm={() => confirmDelete(record)}>
             <Button danger>Reject</Button>
-          </Popconfirm>
+          </Popconfirm> */}
+          <Button danger onClick={() => confirmDelete(record)}>
+            Reject
+          </Button>
         </Space>
       ),
     },
@@ -68,7 +71,9 @@ const Review = () => {
       await deleteReview(review)
       message.success(`Delete ${review._id} success!`)
       fetchAllPendingReviews()
-    } catch (error) {}
+    } catch (error) {
+      console.log('🚀 ~ file: index.js:68 ~ confirmDelete ~ error:', error)
+    }
   }
 
   useEffect(() => {
