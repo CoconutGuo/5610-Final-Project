@@ -21,3 +21,7 @@ export const changeReviewStatus = async (review) => {
 export const findReviewsByUid = async (uid) => {
   return request.get(`${USERS_API}/${uid}`)
 }
+
+export const deleteReview = async (review) => {
+  return request.delete(`${USERS_API}/${review._id}`)
+}
